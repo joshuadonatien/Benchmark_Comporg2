@@ -16,3 +16,7 @@ const long long MEM_OPS = 5e9;    // 5 × 10^9 memory operations
 const long long FILE_SIZE = 1e9;  // 10^9 bytes (1GB)
 const int SMALL_CHUNK = 100;      // 100 bytes per chunk
 const int LARGE_CHUNK = 10000;    // 10000 bytes per chunk
+
+void print_result(const string& name, double seconds) {
+    cout << name << " Benchmark: " << seconds << " seconds" << endl;
+}
