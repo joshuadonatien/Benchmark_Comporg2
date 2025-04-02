@@ -1,0 +1,18 @@
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <chrono>
+#include <random>
+#include <algorithm>
+#include <cmath>
+using namespace std;
+using namespace std::chrono;
+
+// Constants for benchmark operations
+const long long ADD_OPS = 1e10;   // 10^10 additions
+const long long MUL_OPS = 5e9;    // 5 × 10^9 multiplications
+const long long DIV_OPS = 2e9;    // 2 × 10^9 divisions
+const long long MEM_OPS = 5e9;    // 5 × 10^9 memory operations
+const long long FILE_SIZE = 1e9;  // 10^9 bytes (1GB)
+const int SMALL_CHUNK = 100;      // 100 bytes per chunk
+const int LARGE_CHUNK = 10000;    // 10000 bytes per chunk
