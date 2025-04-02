@@ -20,3 +20,27 @@ const int LARGE_CHUNK = 10000;    // 10000 bytes per chunk
 void print_result(const string& name, double seconds) {
     cout << name << " Benchmark: " << seconds << " seconds" << endl;
 }
+
+void integer_benchmark() {
+    auto start = high_resolution_clock::now();
+    int a = 123456789, b = 987654321, c = 0;
+    
+    // Additions - 10^10 operations
+    for (long long i = 0; i < ADD_OPS; i++) {
+        c = a + b;
+    }
+    
+    // Multiplications - 5 × 10^9 operations
+    for (long long i = 0; i < MUL_OPS; i++) {
+        c = a * b;
+    }
+    
+    // Divisions - 2 × 10^9 operations
+    for (long long i = 0; i < DIV_OPS; i++) {
+        c = b / a;
+    }
+    
+    auto end = high_resolution_clock::now();
+    duration<double> elapsed = end - start;
+    print_result("32-bit Integer", elapsed.count());
+}
