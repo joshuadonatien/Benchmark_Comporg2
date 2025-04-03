@@ -44,3 +44,59 @@ void integer_benchmark() {
     duration<double> elapsed = end - start;
     print_result("32-bit Integer", elapsed.count());
 }
+
+void float_benchmark() {
+    auto start = high_resolution_clock::now();
+    double a = 123456789.123456789, b = 987654321.987654321, c = 0.0;
+    
+    // Additions - 10^10 operations
+    for (long long i = 0; i < ADD_OPS; i++) {
+        c = a + b;
+    }
+    
+    // Multiplications - 5 × 10^9 operations
+    for (long long i = 0; i < MUL_OPS; i++) {
+        c = a * b;
+    }
+    
+    // Divisions - 2 × 10^9 operations
+    for (long long i = 0; i < DIV_OPS; i++) {
+        c = b / a;
+    }
+    
+    auto end = high_resolution_clock::now();
+    duration<double> elapsed = end - start;
+    print_result("64-bit Floating Point", elapsed.count());
+}
+
+void memory_benchmark() {
+    // Create a vector for memory operations
+    // Assuming we can use a smaller array and cycle through it
+    // to simulate 5 × 10^9 operations without using actual 5 × 10^9 elements
+    const size_t array_size = 1000000; // Use 1M elements and cycle through them
+    vector<int> memory_array(array_size);
+    
+    // Initialize random number generation
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<size_t> dis(0, array_size - 1);
+    
+    auto start = high_resolution_clock::now();
+    
+    // Memory reads - 5 × 10^9 operations
+    int temp = 0;
+    for (long long i = 0; i < MEM_OPS; i++) {
+        size_t index = i % array_size; // Cycle through array instead of random access
+        temp = memory_array[index];
+    }
+    
+    // Memory writes - 5 × 10^9 operations
+    for (long long i = 0; i < MEM_OPS; i++) {
+        size_t index = i % array_size; // Cycle through array instead of random access
+        memory_array[index] = i;
+    }
+    
+    auto end = high_resolution_clock::now();
+    duration<double> elapsed = end - start;
+    print_result("Memory", elapsed.count());
+}
