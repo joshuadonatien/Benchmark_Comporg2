@@ -144,3 +144,20 @@ void hd_benchmark(const string& filename, int chunk_size) {
     string name = "Hard Drive (" + to_string(chunk_size) + "-byte chunks)";
     print_result(name, total_time);
 }
+
+// Calculate geometric mean of benchmark results
+double calculate_geometric_mean(const vector<double>& times, const vector<double>& reference_times) {
+    // Normalize each time against its reference time
+    vector<double> ratios;
+    for (size_t i = 0; i < times.size(); i++) {
+        ratios.push_back(reference_times[i] / times[i]);
+    }
+    
+    // Calculate geometric mean
+    double product = 1.0;
+    for (double ratio : ratios) {
+        product *= ratio;
+    }
+    
+    return pow(product, 1.0 / ratios.size());
+}
