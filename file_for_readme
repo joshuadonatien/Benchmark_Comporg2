@@ -100,3 +100,13 @@ void memory_benchmark() {
     duration<double> elapsed = end - start;
     print_result("Memory", elapsed.count());
 }
+
+void hd_benchmark(const string& filename, int chunk_size) {
+    vector<char> buffer(chunk_size, 'A');
+    
+    // Write file - 10^9 bytes, chunk_size bytes at a time
+    ofstream outfile(filename, ios::binary);
+    if (!outfile) {
+        cerr << "Failed to open file for writing: " << filename << endl;
+        return;
+    }
