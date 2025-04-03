@@ -161,3 +161,27 @@ double calculate_geometric_mean(const vector<double>& times, const vector<double
     
     return pow(product, 1.0 / ratios.size());
 }
+
+int main() {
+    cout << "Starting benchmarks..." << endl << endl;
+    
+    vector<double> benchmark_times;
+    vector<double> reference_times = {100.0, 100.0, 100.0, 250.0, 10.0};
+    
+    // Integer benchmark
+    integer_benchmark();
+    
+    // Floating point benchmark
+    float_benchmark();
+    
+    // Memory benchmark
+    memory_benchmark();
+    
+    // Hard drive benchmarks
+    hd_benchmark("temp_small.bin", SMALL_CHUNK);
+    hd_benchmark("temp_large.bin", LARGE_CHUNK);
+    
+    cout << endl << "All benchmarks completed." << endl;
+    
+    return 0;
+}
