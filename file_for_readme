@@ -125,3 +125,22 @@ void hd_benchmark(const string& filename, int chunk_size) {
         cerr << "Failed to open file for reading: " << filename << endl;
         return;
     }
+
+    auto start_read = high_resolution_clock::now();
+    while (infile.read(buffer.data(), chunk_size)) {}
+    infile.close();
+    auto end_read = high_resolution_clock::now();
+    
+    // Calculate total time
+    duration<double> write_time = end_write - start_write;
+    duration<double> read_time = end_read - start_read;
+    double total_time = write_time.count() + read_time.count();
+    
+    // Clean up
+    if (remove(filename.c_str()) != 0) {
+        cerr << "Warning: Failed to delete temporary file: " << filename << endl;
+    }
+    
+    string name = "Hard Drive (" + to_string(chunk_size) + "-byte chunks)";
+    print_result(name, total_time);
+}
