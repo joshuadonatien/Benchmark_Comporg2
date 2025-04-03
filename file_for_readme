@@ -110,3 +110,18 @@ void hd_benchmark(const string& filename, int chunk_size) {
         cerr << "Failed to open file for writing: " << filename << endl;
         return;
     }
+
+    auto start_write = high_resolution_clock::now();
+    long long chunks_to_write = FILE_SIZE / chunk_size;
+    for (long long i = 0; i < chunks_to_write; i++) {
+        outfile.write(buffer.data(), chunk_size);
+    }
+    outfile.close();
+    auto end_write = high_resolution_clock::now();
+    
+    // Read file - 10^9 bytes, chunk_size bytes at a time
+    ifstream infile(filename, ios::binary);
+    if (!infile) {
+        cerr << "Failed to open file for reading: " << filename << endl;
+        return;
+    }
